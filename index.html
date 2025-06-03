@@ -3,71 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSage Studio Logo</title>
+    <title>DeepSage Studio - 智深工作室</title>
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-            font-family: 'Arial', sans-serif;
+        :root {
+            --primary-color: #00ffff;
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
         }
 
-        .logo-container {
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1rem 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-size: 4rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #fff;
+            color: var(--text-color);
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
             position: relative;
-            display: inline-block;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
         }
 
         .logo::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid #00ffff;
-            border-radius: 10px;
-            opacity: 0.5;
-            animation: pulse 2s infinite;
+            display: none;
         }
 
-        .subtitle {
-            color: #00ffff;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
             font-size: 1.2rem;
-            margin-top: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <div class="logo">DeepSage</div>
-        <div class="subtitle">STUDIO</div>
-    </div>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.svg" alt="DeepSage Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#about">关于我们</a>
+                <a href="#services">服务内容</a>
+                <a href="#contact">联系我们</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>智深工作室</h1>
+            <p>致力于AI技术与传统应用的深度融合，打破信息孤岛，构建智能互联的未来</p>
+            <a href="#contact" class="cta-button">联系我们</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">关于我们</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+            智深工作室是一家专注于人工智能技术创新的研发团队。我们致力于将前沿的AI技术与传统行业应用深度融合，
+            通过创新的解决方案，帮助企业打破信息孤岛，实现数据价值的最大化。我们的使命是让AI技术真正服务于人类，
+            为各行各业带来革命性的变革。
+        </p>
+    </section>
+
+    <section id="services" class="section">
+        <h2 class="section-title">服务内容</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>AI解决方案</h3>
+                <p>为企业提供定制化的AI解决方案，包括智能决策系统、预测分析、自动化流程等，帮助企业提升运营效率。</p>
+            </div>
+            <div class="service-card">
+                <h3>数据整合</h3>
+                <p>打破信息孤岛，整合多源异构数据，构建统一的数据平台，实现数据的互联互通和价值挖掘。</p>
+            </div>
+            <div class="service-card">
+                <h3>智能应用开发</h3>
+                <p>开发智能化的应用程序，将AI能力无缝集成到现有系统中，提供更智能、更高效的用户体验。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">联系我们</h2>
+        <p style="text-align: center;">
+            期待与您共同探索AI技术的无限可能<br>
+            邮箱：herongkang@7soft.cn
+        </p>
+    </section>
 </body>
 </html>
