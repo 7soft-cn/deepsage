@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.5"/>
+            <stop offset="100%" style="stop-color:#00ffff;stop-opacity:0.3"/>
+        </linearGradient>
+    </defs>
+    
+    <!-- 发光文字 -->
+    <text x="50%" y="50%" 
+          font-family="Arial, sans-serif" 
+          font-size="32" 
+          font-weight="bold" 
+          fill="white" 
+          text-anchor="middle" 
+          dominant-baseline="middle"
+          filter="url(#glow)">
+        DeepSage
+    </text>
+    
+    <!-- 动态边框 -->
+    <rect x="5" y="5" 
+          width="190" height="50" 
+          rx="8" 
+          fill="none" 
+          stroke="url(#borderGradient)" 
+          stroke-width="2">
+        <animate attributeName="opacity" 
+                 values="0.5;0.3;0.5" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+        <animate attributeName="width" 
+                 values="190;195;190" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+        <animate attributeName="height" 
+                 values="50;52;50" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+    </rect>
+</svg> 
