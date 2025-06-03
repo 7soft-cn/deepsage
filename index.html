@@ -66,6 +66,8 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            flex-wrap: nowrap;
+            white-space: nowrap;
         }
 
         .nav-links a {
@@ -190,7 +192,250 @@
                 font-size: 0.9rem;
             }
         }
+
+        .language-switch {
+            position: relative;
+            display: inline-block;
+            margin-left: 2rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-btn::after {
+            content: '▼';
+            font-size: 0.8rem;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 0.5rem 0;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+        }
+
+        .language-dropdown.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .language-dropdown a:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
+    <script>
+        const translations = {
+            'zh-CN': {
+                title: 'DeepSage Studio - 智深工作室',
+                about: '关于我们',
+                services: '服务内容',
+                contact: '联系我们',
+                heroTitle: '智深工作室',
+                heroSubtitle: '致力于AI技术与传统应用的深度融合，打破信息孤岛，构建智能互联的未来',
+                aboutContent: '智深工作室是一家专注于人工智能技术创新的研发团队。我们致力于将前沿的AI技术与传统行业应用深度融合，通过创新的解决方案，帮助企业打破信息孤岛，实现数据价值的最大化。我们的使命是让AI技术真正服务于人类，为各行各业带来革命性的变革。',
+                service1: 'AI解决方案',
+                service1Desc: '为企业提供定制化的AI解决方案，包括智能决策系统、预测分析、自动化流程等，帮助企业提升运营效率。',
+                service2: '数据整合',
+                service2Desc: '打破信息孤岛，整合多源异构数据，构建统一的数据平台，实现数据的互联互通和价值挖掘。',
+                service3: '智能应用开发',
+                service3Desc: '开发智能化的应用程序，将AI能力无缝集成到现有系统中，提供更智能、更高效的用户体验。',
+                contactContent: '期待与您共同探索AI技术的无限可能<br>邮箱：herongkang@7soft.cn'
+            },
+            'zh-TW': {
+                title: 'DeepSage Studio - 智深工作室',
+                about: '關於我們',
+                services: '服務內容',
+                contact: '聯繫我們',
+                heroTitle: '智深工作室',
+                heroSubtitle: '致力於AI技術與傳統應用的深度融合，打破信息孤島，構建智能互聯的未來',
+                aboutContent: '智深工作室是一家專注於人工智能技術創新的研發團隊。我們致力於將前沿的AI技術與傳統行業應用深度融合，通過創新的解決方案，幫助企業打破信息孤島，實現數據價值的最大化。我們的使命是讓AI技術真正服務於人類，為各行各業帶來革命性的變革。',
+                service1: 'AI解決方案',
+                service1Desc: '為企業提供定制化的AI解決方案，包括智能決策系統、預測分析、自動化流程等，幫助企業提升運營效率。',
+                service2: '數據整合',
+                service2Desc: '打破信息孤島，整合多源異構數據，構建統一的數據平台，實現數據的互聯互通和價值挖掘。',
+                service3: '智能應用開發',
+                service3Desc: '開發智能化的應用程序，將AI能力無縫集成到現有系統中，提供更智能、更高效的用戶體驗。',
+                contactContent: '期待與您共同探索AI技術的無限可能<br>郵箱：herongkang@7soft.cn'
+            },
+            'en': {
+                title: 'DeepSage Studio',
+                about: 'About Us',
+                services: 'Services',
+                contact: 'Contact',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Dedicated to the deep integration of AI technology with traditional applications, breaking information silos and building a smart interconnected future',
+                aboutContent: 'DeepSage Studio is a research and development team focused on artificial intelligence technology innovation. We are dedicated to deeply integrating cutting-edge AI technology with traditional industry applications, helping enterprises break information silos and maximize data value through innovative solutions. Our mission is to make AI technology truly serve humanity and bring revolutionary changes to various industries.',
+                service1: 'AI Solutions',
+                service1Desc: 'Provide customized AI solutions for enterprises, including intelligent decision-making systems, predictive analysis, and automated processes, helping enterprises improve operational efficiency.',
+                service2: 'Data Integration',
+                service2Desc: 'Break information silos, integrate multi-source heterogeneous data, build a unified data platform, and achieve data interconnection and value mining.',
+                service3: 'Smart Application Development',
+                service3Desc: 'Develop intelligent applications, seamlessly integrate AI capabilities into existing systems, and provide a smarter and more efficient user experience.',
+                contactContent: 'Looking forward to exploring the infinite possibilities of AI technology with you<br>Email: herongkang@7soft.cn'
+            },
+            'ja': {
+                title: 'DeepSage Studio',
+                about: '会社概要',
+                services: 'サービス',
+                contact: 'お問い合わせ',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'AI技術と伝統的アプリケーションの深い統合に取り組み、情報の壁を打破し、スマートな相互接続の未来を構築します',
+                aboutContent: 'DeepSage Studioは、人工知能技術の革新に焦点を当てた研究開発チームです。最先端のAI技術を伝統的な業界アプリケーションと深く統合し、革新的なソリューションを通じて企業が情報の壁を打破し、データ価値を最大化することを支援します。私たちの使命は、AI技術を人類に真に役立て、様々な業界に革命的な変化をもたらすことです。',
+                service1: 'AIソリューション',
+                service1Desc: '企業向けのカスタマイズされたAIソリューションを提供し、インテリジェントな意思決定システム、予測分析、自動化プロセスなどにより、企業の運営効率を向上させます。',
+                service2: 'データ統合',
+                service2Desc: '情報の壁を打破し、多様なデータを統合し、統一されたデータプラットフォームを構築し、データの相互接続と価値の掘り起こしを実現します。',
+                service3: 'スマートアプリケーション開発',
+                service3Desc: 'インテリジェントなアプリケーションを開発し、AI機能を既存システムにシームレスに統合し、よりスマートで効率的なユーザー体験を提供します。',
+                contactContent: 'AI技術の無限の可能性を共に探求しましょう<br>メール：herongkang@7soft.cn'
+            },
+            'fr': {
+                title: 'DeepSage Studio',
+                about: 'À Propos',
+                services: 'Services',
+                contact: 'Contact',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Dédié à l\'intégration profonde de la technologie IA avec les applications traditionnelles, brisant les silos d\'information et construisant un avenir interconnecté intelligent',
+                aboutContent: 'DeepSage Studio est une équipe de recherche et développement axée sur l\'innovation technologique en intelligence artificielle. Nous nous consacrons à l\'intégration profonde des technologies IA de pointe avec les applications industrielles traditionnelles, aidant les entreprises à briser les silos d\'information et à maximiser la valeur des données grâce à des solutions innovantes. Notre mission est de faire en sorte que la technologie IA serve véritablement l\'humanité et apporte des changements révolutionnaires à diverses industries.',
+                service1: 'Solutions IA',
+                service1Desc: 'Fournir des solutions IA personnalisées pour les entreprises, y compris des systèmes de prise de décision intelligents, des analyses prédictives et des processus automatisés, aidant les entreprises à améliorer leur efficacité opérationnelle.',
+                service2: 'Intégration de Données',
+                service2Desc: 'Briser les silos d\'information, intégrer des données hétérogènes multi-sources, construire une plateforme de données unifiée et réaliser l\'interconnexion et l\'exploitation de la valeur des données.',
+                service3: 'Développement d\'Applications Intelligentes',
+                service3Desc: 'Développer des applications intelligentes, intégrer de manière transparente les capacités IA dans les systèmes existants et fournir une expérience utilisateur plus intelligente et plus efficace.',
+                contactContent: 'Nous sommes impatients d\'explorer les possibilités infinies de la technologie IA avec vous<br>Email : herongkang@7soft.cn'
+            },
+            'ru': {
+                title: 'DeepSage Studio',
+                about: 'О Нас',
+                services: 'Услуги',
+                contact: 'Контакты',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Посвящены глубокой интеграции технологии ИИ с традиционными приложениями, разрушая информационные барьеры и строя умное взаимосвязанное будущее',
+                aboutContent: 'DeepSage Studio — это команда разработчиков, специализирующаяся на инновациях в области искусственного интеллекта. Мы стремимся к глубокой интеграции передовых технологий ИИ с традиционными отраслевыми приложениями, помогая предприятиям разрушать информационные барьеры и максимизировать ценность данных с помощью инновационных решений. Наша миссия — сделать технологию ИИ действительно полезной для человечества и принести революционные изменения в различные отрасли.',
+                service1: 'Решения на базе ИИ',
+                service1Desc: 'Предоставление индивидуальных решений на базе ИИ для предприятий, включая интеллектуальные системы принятия решений, прогнозную аналитику и автоматизированные процессы, помогая предприятиям повысить операционную эффективность.',
+                service2: 'Интеграция Данных',
+                service2Desc: 'Разрушение информационных барьеров, интеграция многоисточниковых гетерогенных данных, построение единой платформы данных и достижение взаимосвязи и извлечения ценности из данных.',
+                service3: 'Разработка Умных Приложений',
+                service3Desc: 'Разработка интеллектуальных приложений, бесшовная интеграция возможностей ИИ в существующие системы и предоставление более умного и эффективного пользовательского опыта.',
+                contactContent: 'С нетерпением ждем возможности исследовать бесконечные возможности технологии ИИ вместе с вами<br>Email: herongkang@7soft.cn'
+            },
+            'es': {
+                title: 'DeepSage Studio',
+                about: 'Sobre Nosotros',
+                services: 'Servicios',
+                contact: 'Contacto',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Dedicados a la integración profunda de la tecnología de IA con aplicaciones tradicionales, rompiendo silos de información y construyendo un futuro interconectado inteligente',
+                aboutContent: 'DeepSage Studio es un equipo de investigación y desarrollo centrado en la innovación tecnológica de inteligencia artificial. Nos dedicamos a integrar profundamente la tecnología de IA de vanguardia con aplicaciones industriales tradicionales, ayudando a las empresas a romper los silos de información y maximizar el valor de los datos a través de soluciones innovadoras. Nuestra misión es hacer que la tecnología de IA sirva verdaderamente a la humanidad y traiga cambios revolucionarios a diversas industrias.',
+                service1: 'Soluciones de IA',
+                service1Desc: 'Proporcionar soluciones de IA personalizadas para empresas, incluyendo sistemas de toma de decisiones inteligentes, análisis predictivo y procesos automatizados, ayudando a las empresas a mejorar la eficiencia operativa.',
+                service2: 'Integración de Datos',
+                service2Desc: 'Romper los silos de información, integrar datos heterogéneos de múltiples fuentes, construir una plataforma de datos unificada y lograr la interconexión y la extracción de valor de los datos.',
+                service3: 'Desarrollo de Aplicaciones Inteligentes',
+                service3Desc: 'Desarrollar aplicaciones inteligentes, integrar sin problemas las capacidades de IA en sistemas existentes y proporcionar una experiencia de usuario más inteligente y eficiente.',
+                contactContent: 'Esperamos explorar las infinitas posibilidades de la tecnología de IA con usted<br>Correo electrónico: herongkang@7soft.cn'
+            },
+            'de': {
+                title: 'DeepSage Studio',
+                about: 'Über Uns',
+                services: 'Dienstleistungen',
+                contact: 'Kontakt',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Wir widmen uns der tiefen Integration von KI-Technologie mit traditionellen Anwendungen, brechen Informationssilos und bauen eine intelligente vernetzte Zukunft',
+                aboutContent: 'DeepSage Studio ist ein Forschungsteam, das sich auf Innovationen in der künstlichen Intelligenz konzentriert. Wir setzen uns für die tiefe Integration modernster KI-Technologie mit traditionellen Branchenanwendungen ein und helfen Unternehmen, Informationssilos zu durchbrechen und den Datenwert durch innovative Lösungen zu maximieren. Unsere Mission ist es, KI-Technologie wirklich der Menschheit zu dienen und revolutionäre Veränderungen in verschiedenen Branchen zu bringen.',
+                service1: 'KI-Lösungen',
+                service1Desc: 'Bereitstellung maßgeschneiderter KI-Lösungen für Unternehmen, einschließlich intelligenter Entscheidungssysteme, prädiktiver Analysen und automatisierter Prozesse, um die betriebliche Effizienz zu steigern.',
+                service2: 'Datenintegration',
+                service2Desc: 'Informationssilos durchbrechen, heterogene Daten aus mehreren Quellen integrieren, eine einheitliche Datenplattform aufbauen und Datenvernetzung und Wertschöpfung erreichen.',
+                service3: 'Entwicklung intelligenter Anwendungen',
+                service3Desc: 'Entwicklung intelligenter Anwendungen, nahtlose Integration von KI-Funktionen in bestehende Systeme und Bereitstellung einer intelligenteren und effizienteren Benutzererfahrung.',
+                contactContent: 'Wir freuen uns darauf, die unendlichen Möglichkeiten der KI-Technologie mit Ihnen zu erkunden<br>E-Mail: herongkang@7soft.cn'
+            },
+            'ko': {
+                title: 'DeepSage Studio',
+                about: '회사 소개',
+                services: '서비스',
+                contact: '연락처',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'AI 기술과 전통적인 응용 프로그램의 깊은 통합에 전념하여 정보 격차를 해소하고 스마트한 상호 연결된 미래를 구축합니다',
+                aboutContent: 'DeepSage Studio는 인공 지능 기술 혁신에 중점을 둔 연구 개발 팀입니다. 최첨단 AI 기술을 전통적인 산업 응용 프로그램과 깊이 통합하여 혁신적인 솔루션을 통해 기업이 정보 격차를 해소하고 데이터 가치를 최대화하도록 돕습니다. 우리의 사명은 AI 기술이 인류에 진정으로 봉사하고 다양한 산업에 혁명적인 변화를 가져오는 것입니다.',
+                service1: 'AI 솔루션',
+                service1Desc: '기업을 위한 맞춤형 AI 솔루션을 제공하여 지능형 의사 결정 시스템, 예측 분석 및 자동화된 프로세스를 통해 운영 효율성을 향상시킵니다.',
+                service2: '데이터 통합',
+                service2Desc: '정보 격차를 해소하고 다중 소스 이기종 데이터를 통합하여 통합 데이터 플랫폼을 구축하고 데이터 상호 연결 및 가치 추출을 달성합니다.',
+                service3: '스마트 애플리케이션 개발',
+                service3Desc: '스마트 애플리케이션을 개발하고 AI 기능을 기존 시스템에 원활하게 통합하여 더 스마트하고 효율적인 사용자 경험을 제공합니다.',
+                contactContent: 'AI 기술의 무한한 가능성을 함께 탐구하기를 기대합니다<br>이메일: herongkang@7soft.cn'
+            },
+            'it': {
+                title: 'DeepSage Studio',
+                about: 'Chi Siamo',
+                services: 'Servizi',
+                contact: 'Contatti',
+                heroTitle: 'DeepSage Studio',
+                heroSubtitle: 'Dedicati all\'integrazione profonda della tecnologia AI con le applicazioni tradizionali, rompendo i silos informativi e costruendo un futuro interconnesso intelligente',
+                aboutContent: 'DeepSage Studio è un team di ricerca e sviluppo focalizzato sull\'innovazione tecnologica dell\'intelligenza artificiale. Ci dedichiamo all\'integrazione profonda della tecnologia AI all\'avanguardia con le applicazioni industriali tradizionali, aiutando le aziende a rompere i silos informativi e massimizzare il valore dei dati attraverso soluzioni innovative. La nostra missione è far sì che la tecnologia AI serva veramente l\'umanità e porti cambiamenti rivoluzionari in vari settori.',
+                service1: 'Soluzioni AI',
+                service1Desc: 'Fornire soluzioni AI personalizzate per le aziende, inclusi sistemi di decisione intelligenti, analisi predittive e processi automatizzati, aiutando le aziende a migliorare l\'efficienza operativa.',
+                service2: 'Integrazione dei Dati',
+                service2Desc: 'Rompendo i silos informativi, integrando dati eterogenei multi-sorgente, costruendo una piattaforma dati unificata e raggiungendo l\'interconnessione e l\'estrazione di valore dai dati.',
+                service3: 'Sviluppo di Applicazioni Intelligenti',
+                service3Desc: 'Sviluppare applicazioni intelligenti, integrando perfettamente le capacità AI nei sistemi esistenti e fornendo un\'esperienza utente più intelligente ed efficiente.',
+                contactContent: 'Non vediamo l\'ora di esplorare le infinite possibilità della tecnologia AI con te<br>Email: herongkang@7soft.cn'
+            }
+        };
+
+        function updateLanguage(lang) {
+            const t = translations[lang];
+            document.title = t.title;
+            document.querySelector('.nav-links a[href="#about"]').textContent = t.about;
+            document.querySelector('.nav-links a[href="#services"]').textContent = t.services;
+            document.querySelector('.nav-links a[href="#contact"]').textContent = t.contact;
+            document.querySelector('.hero h1').textContent = t.heroTitle;
+            document.querySelector('.hero p').textContent = t.heroSubtitle;
+            document.querySelector('#about .section-title').textContent = t.about;
+            document.querySelector('#about p').textContent = t.aboutContent;
+            document.querySelector('#services .section-title').textContent = t.services;
+            document.querySelector('.service-card:nth-child(1) h3').textContent = t.service1;
+            document.querySelector('.service-card:nth-child(1) p').textContent = t.service1Desc;
+            document.querySelector('.service-card:nth-child(2) h3').textContent = t.service2;
+            document.querySelector('.service-card:nth-child(2) p').textContent = t.service2Desc;
+            document.querySelector('.service-card:nth-child(3) h3').textContent = t.service3;
+            document.querySelector('.service-card:nth-child(3) p').textContent = t.service3Desc;
+            document.querySelector('#contact .section-title').textContent = t.contact;
+            document.querySelector('#contact p').innerHTML = t.contactContent;
+        }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -202,6 +447,21 @@
                 <a href="#about">关于我们</a>
                 <a href="#services">服务内容</a>
                 <a href="#contact">联系我们</a>
+            </div>
+            <div class="language-switch">
+                <button class="language-btn">语言</button>
+                <div class="language-dropdown">
+                    <a href="#" data-lang="zh-CN">中文简体</a>
+                    <a href="#" data-lang="zh-TW">中文繁体</a>
+                    <a href="#" data-lang="en">English</a>
+                    <a href="#" data-lang="ja">日本語</a>
+                    <a href="#" data-lang="fr">Français</a>
+                    <a href="#" data-lang="ru">Русский</a>
+                    <a href="#" data-lang="es">Español</a>
+                    <a href="#" data-lang="de">Deutsch</a>
+                    <a href="#" data-lang="ko">한국어</a>
+                    <a href="#" data-lang="it">Italiano</a>
+                </div>
             </div>
         </nav>
     </header>
@@ -252,6 +512,44 @@
     <script>
         if (window.innerWidth <= 768) {
             document.body.classList.add('mobile');
+        }
+
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        const languageLinks = document.querySelectorAll('.language-dropdown a');
+
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('show');
+        });
+
+        languageLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = link.getAttribute('data-lang');
+                updateLanguage(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+
+        function updateLanguage(lang) {
+            const t = translations[lang];
+            document.title = t.title;
+            document.querySelector('.nav-links a[href="#about"]').textContent = t.about;
+            document.querySelector('.nav-links a[href="#services"]').textContent = t.services;
+            document.querySelector('.nav-links a[href="#contact"]').textContent = t.contact;
+            document.querySelector('.hero h1').textContent = t.heroTitle;
+            document.querySelector('.hero p').textContent = t.heroSubtitle;
+            document.querySelector('#about .section-title').textContent = t.about;
+            document.querySelector('#about p').textContent = t.aboutContent;
+            document.querySelector('#services .section-title').textContent = t.services;
+            document.querySelector('.service-card:nth-child(1) h3').textContent = t.service1;
+            document.querySelector('.service-card:nth-child(1) p').textContent = t.service1Desc;
+            document.querySelector('.service-card:nth-child(2) h3').textContent = t.service2;
+            document.querySelector('.service-card:nth-child(2) p').textContent = t.service2Desc;
+            document.querySelector('.service-card:nth-child(3) h3').textContent = t.service3;
+            document.querySelector('.service-card:nth-child(3) p').textContent = t.service3Desc;
+            document.querySelector('#contact .section-title').textContent = t.contact;
+            document.querySelector('#contact p').innerHTML = t.contactContent;
         }
     </script>
 </body>
